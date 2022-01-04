@@ -1,0 +1,21 @@
+[submodule "app/src/main/cpp/texgz"]
+	path = app/src/main/cpp/texgz
+	url = git@github.com:jeffboody/texgz.git
+[submodule "app/src/main/cpp/libpak"]
+	path = app/src/main/cpp/libpak
+	url = git@github.com:jeffboody/libpak.git
+[submodule "app/src/main/cpp/libexpat"]
+	path = app/src/main/cpp/libexpat
+	url = git@github.com:jeffboody/libexpat.git
+[submodule "app/src/main/cpp/libvkk"]
+	path = app/src/main/cpp/libvkk
+	url = git@github.com:jeffboody/libvkk.git
+[submodule "app/src/main/cpp/libcc"]
+	path = app/src/main/cpp/libcc
+	url = git@github.com:jeffboody/libcc.git
+[submodule "app/src/main/cpp/lodepng"]
+	path = app/src/main/cpp/lodepng
+	url = git@github.com:lvandeve/lodepng.git
+[submodule "app/src/main/cpp/libxmlstream"]
+	path = app/src/main/cpp/libxmlstream
+	url = git@github.com:jeffboody/libxmlstream.git

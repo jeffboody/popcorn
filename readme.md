@@ -3,7 +3,29 @@ About
 
 Popcorn is a mini flight simulator demo.
 
+The cockpit model was created by Dale Boody.
+
 Send questions or comments to Jeff Boody at jeffboody@gmail.com
+
+Controls
+========
+
+Popcorn requires an XBox style controller.
+
+	Aileron/Roll:   left stick X axis
+	Elevator/Pitch: left stick Y axis
+	Rudder/Yaw:     left/right triggers
+	Head:           right stick
+	Thrust:         B button
+	Brake:          A button
+	Reset:          X button
+
+Screenshots
+===========
+
+Here is a screenshot of the Popcorn Flight Simulator.
+
+![alt text](screenshot.jpg?raw=true "Popcorn Flight Simulator")
 
 Setup
 =====
