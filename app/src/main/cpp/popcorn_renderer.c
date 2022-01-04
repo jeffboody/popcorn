@@ -260,8 +260,8 @@ popcorn_renderer_new(vkk_engine_t* engine)
 
 	self->ub00_mvp = vkk_buffer_new(engine,
 	                                VKK_UPDATE_MODE_ASYNCHRONOUS,
-	                                VKK_BUFFER_USAGE_VERTEX,
-	                                0, NULL);
+	                                VKK_BUFFER_USAGE_UNIFORM,
+	                                sizeof(cc_mat4f_t), NULL);
 	if(self->ub00_mvp == NULL)
 	{
 		goto fail_ub00_mvp;
