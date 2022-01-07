@@ -220,6 +220,49 @@ popcorn_renderer_reset(popcorn_renderer_t* self)
 	cc_quaternion_identity(&self->attitude);
 }
 
+static void
+popcorn_renderer_resetSpherical(popcorn_renderer_t* self,
+                                float bearing, float tilt)
+{
+	ASSERT(self);
+
+	self->speed        = 0.0f;
+	self->acceleration = 0.0f;
+	cc_vec3f_load(&self->position, 0.0f, 0.0f, 0.0f);
+
+	// remap orientation
+	// see the principle axes of an aircraft
+	// https://en.wikipedia.org/wiki/Euler_angles
+	cc_mat4f_t mvm; // model-view-matrix
+	cc_mat4f_lookat(&mvm, 1,
+	                0.0f, 0.0f, 0.0f,
+	                1.0f, 0.0f, 0.0f,
+	                0.0f, 0.0f, -1.0f);
+	cc_mat4f_transpose(&mvm);
+
+	// convert to radians
+	bearing *= (M_PI/180.0f);
+	tilt    *= (M_PI/180.0f);
+
+	cc_vec4f_t vpn =
+	{
+		.x = cos(bearing)*sin(tilt),
+		.y = sin(bearing)*sin(tilt),
+		.z = cos(tilt),
+	};
+	cc_vec4f_t up =
+	{
+		.x = 0.0f,
+		.y = 0.0f,
+		.z = 1.0f,
+	};
+	cc_mat4f_lookat(&mvm, 0,
+	                0.0f,  0.0f,  0.0f,
+	                vpn.x, vpn.y, vpn.z,
+	                up.x,  up.y,  up.z);
+	cc_mat4f_quaternion(&mvm, &self->attitude);
+}
+
 /***********************************************************
 * public                                                   *
 ***********************************************************/
@@ -241,8 +284,8 @@ popcorn_renderer_new(vkk_engine_t* engine)
 	self->engine    = engine;
 	self->escape_t0 = cc_timestamp();
 
-	// default attitude
-	cc_quaternion_identity(&self->attitude);
+	// attitude quaternion must be initialized
+	popcorn_renderer_reset(self);
 
 	if(popcorn_renderer_newUniformSetFactory(self) == 0)
 	{
