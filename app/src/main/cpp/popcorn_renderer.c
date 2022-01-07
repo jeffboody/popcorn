@@ -161,6 +161,55 @@ popcorn_renderer_keyPress(popcorn_renderer_t* self,
 }
 
 static void
+popcorn_renderer_vpn(popcorn_renderer_t* self,
+                     cc_vec4f_t* vpn)
+{
+	ASSERT(self);
+	ASSERT(vpn);
+
+	// remap orientation
+	// see the principle axes of an aircraft
+	// https://en.wikipedia.org/wiki/Euler_angles
+	cc_mat4f_t mvm; // model-view-matrix
+	cc_mat4f_lookat(&mvm, 1,
+	                0.0f, 0.0f, 0.0f,
+	                1.0f, 0.0f, 0.0f,
+	                0.0f, 0.0f, -1.0f);
+	cc_mat4f_rotateq(&mvm, 0, &self->attitude);
+
+	// vpn is the negative z-axis of the
+	// rotation matrix
+	vpn->x = -mvm.m20;
+	vpn->y = -mvm.m21;
+	vpn->z = -mvm.m22;
+	vpn->w = 1.0f;
+}
+
+static void
+popcorn_renderer_spherical(popcorn_renderer_t* self,
+                           float* _bearing,
+                           float* _tilt)
+{
+	ASSERT(self);
+	ASSERT(_bearing);
+	ASSERT(_tilt);
+
+	cc_vec4f_t vpn;
+	popcorn_renderer_vpn(self, &vpn);
+
+	// x = cos(bearing)*sin(tilt)
+	// y = sin(bearing)*sin(tilt)
+	// z = cos(tilt)
+	// sin(tilt)=x/cos(bearing)=y/sin(bearing)
+	// y/x = sin(bearing)/cos(bearing)=tan(bearing)
+	float tilt    = acos(vpn.z);
+	float bearing = atan2(vpn.y, vpn.x);
+
+	*_bearing = (180.0f/M_PI)*bearing;
+	*_tilt    = (180.0f/M_PI)*tilt;
+}
+
+static void
 popcorn_renderer_reset(popcorn_renderer_t* self)
 {
 	ASSERT(self);
