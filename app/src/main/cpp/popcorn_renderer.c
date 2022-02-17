@@ -507,7 +507,7 @@ void popcorn_renderer_draw(popcorn_renderer_t* self)
 	cc_mat4f_copy(&mvm, &mnm);
 
 	// head rotation
-	float rx = -60.0f*self->rx;
+	float rx = -90.0f*self->rx;
 	float ry = 30.0f*self->ry;
 	cc_mat4f_rotate(&mvm, 0, rx, 0.0f, 0.0f, 1.0f);
 	cc_mat4f_rotate(&mvm, 0, ry, 0.0f, 1.0f, 0.0f);

@@ -25,3 +25,9 @@
 [submodule "app/src/main/cpp/jpeg"]
 	path = app/src/main/cpp/jpeg
 	url = git@github.com:jeffboody/myjpeg.git
+[submodule "app/src/main/cpp/jsmn"]
+	path = app/src/main/cpp/jsmn
+	url = git@github.com:jeffboody/jsmn.git
+[submodule "app/src/main/cpp/libgltf"]
+	path = app/src/main/cpp/libgltf
+	url = git@github.com:jeffboody/libgltf.git

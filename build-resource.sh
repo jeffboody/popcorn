@@ -17,7 +17,7 @@ pak -a $RESOURCE shaders/cube_vert.spv
 pak -a $RESOURCE shaders/cube_frag.spv
 pak -a $RESOURCE shaders/cockpit_frag.spv
 pak -a $RESOURCE shaders/cockpit_vert.spv
-pak -a $RESOURCE models/cockpit.stl
+pak -a $RESOURCE models/bat-rider.glb
 
 # cleanup shaders
 rm shaders/*.spv

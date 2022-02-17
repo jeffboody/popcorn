@@ -23,7 +23,15 @@
 #ifndef popcorn_cockpit_H
 #define popcorn_cockpit_H
 
+#include "libcc/cc_list.h"
 #include "libvkk/vkk.h"
+
+typedef struct
+{
+	uint32_t      ic;
+	vkk_buffer_t* ib;
+	vkk_buffer_t* vbnb[2];
+} popcorn_part_t;
 
 typedef struct popcorn_cockpit_s
 {
@@ -33,9 +41,7 @@ typedef struct popcorn_cockpit_s
 	vkk_graphicsPipeline_t*  gp;
 	vkk_buffer_t*            ub00_mvp;
 	vkk_uniformSet_t*        us0;
-
-	uint32_t      vc;
-	vkk_buffer_t* vbnb[2];
+	cc_list_t*               parts;
 } popcorn_cockpit_t;
 
 popcorn_cockpit_t* popcorn_cockpit_new(vkk_engine_t* engine);
