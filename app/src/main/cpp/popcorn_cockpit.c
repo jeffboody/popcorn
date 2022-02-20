@@ -76,6 +76,16 @@ popcorn_part_new(vkk_engine_t* engine, gltf_file_t* file,
 		return NULL;
 	}
 
+	// check for required accessor types
+	if((aib->type != GLTF_ACCESSOR_TYPE_SCALAR) ||
+	   (anb->type != GLTF_ACCESSOR_TYPE_VEC3)   ||
+	   (avb->type != GLTF_ACCESSOR_TYPE_VEC3))
+	{
+		LOGE("invalid type=0x%X,0x%X,0x%X",
+		     aib->type, anb->type, avb->type);
+		return NULL;
+	}
+
 	// check for required component types
 	if((aib->componentType != GLTF_COMPONENT_TYPE_UNSIGNED_SHORT) ||
 	   (anb->componentType != GLTF_COMPONENT_TYPE_FLOAT)          ||
